@@ -1,6 +1,4 @@
 # learn-java
 
-## java learning code.
-
-### netty
+## netty
 	* netty server & client communicate
