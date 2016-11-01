@@ -16,11 +16,13 @@ public class Client {
         ConnectionManager.INSTANCE.init();
         RequestGenerator generator = new RequestGenerator();
         Connection connection = ConnectionManager.INSTANCE.getConnection();
-//        for(int i = 0; i < 10; i++){
-//            Object response = connection.sendSync(generator.generate());
-//            System.out.println("response from sync-request :" + response);
-//        }
-//        System.out.println("over..");
+        System.out.println("start test sync");
+        for(int i = 0; i < 10; i++){
+            Object response = connection.sendSync(generator.generate());
+            System.out.println("response from sync-request :" + response);
+        }
+        System.out.println("test sync over..");
+        System.out.println("start test async");
         for(int i = 0; i < 10; i++){
             connection.sendAsync(generator.generate(), new Callback() {
 
@@ -34,6 +36,7 @@ public class Client {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("test async over..");
         ConnectionManager.INSTANCE.returnConnection(connection);
         ConnectionManager.INSTANCE.close();
     }
