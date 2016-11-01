@@ -1,8 +1,10 @@
 package com.howe.learn.client;
 
+import com.howe.learn.common.RemoteResponse;
 import com.howe.learn.common.request.CalcRequest;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author Karl
@@ -11,16 +13,29 @@ import java.util.Random;
 public class Client {
 
     public static void main(String[] args) throws InterruptedException {
-        ClientManager.INSTANCE.init();
+        ConnectionManager.INSTANCE.init();
         RequestGenerator generator = new RequestGenerator();
-        ClientManager.Connection connection = ClientManager.INSTANCE.getConnection();
-        for(int i = 0; i < 100; i++){
-            Object response = connection.sendSync(generator.generate());
-            System.out.println(response);
+        Connection connection = ConnectionManager.INSTANCE.getConnection();
+//        for(int i = 0; i < 10; i++){
+//            Object response = connection.sendSync(generator.generate());
+//            System.out.println("response from sync-request :" + response);
+//        }
+//        System.out.println("over..");
+        for(int i = 0; i < 10; i++){
+            connection.sendAsync(generator.generate(), new Callback() {
+
+                public void call(RemoteResponse resp) {
+                    System.out.println("response from async-request :" + resp);
+                }
+            });
         }
-        System.out.println("over..");
-        ClientManager.INSTANCE.returnConnection(connection);
-        ClientManager.INSTANCE.close();
+        try{
+            TimeUnit.SECONDS.sleep(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ConnectionManager.INSTANCE.returnConnection(connection);
+        ConnectionManager.INSTANCE.close();
     }
 
     static class RequestGenerator {
