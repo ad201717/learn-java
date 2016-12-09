@@ -36,7 +36,7 @@ public class Client {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("test async over..");
+        System.out.println("test sync over..");
         ConnectionManager.INSTANCE.returnConnection(connection);
         ConnectionManager.INSTANCE.close();
     }
