@@ -12,6 +12,22 @@
     <modules>
         <module>netty</module>
         <module>mappedByteBuffer</module>
+        <module>redis</module>
     </modules>
 
+    <build>
+        <plugins>
+        <!-- 指定编译环境，防止出现泛型编译等错误 -->
+        <!-- compiler插件, 设定JDK版本 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
