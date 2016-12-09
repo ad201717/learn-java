@@ -20,30 +20,44 @@ public class SimpleOpMappedByteBuffer {
 
     private static final int totalSize = 10 * 1024 * 1024;
 
-    public static void main(String args[]) throws IOException {
-        RandomAccessFile file = new RandomAccessFile("/mapped.dat", "rw");
-        MappedByteBuffer mappedByteBuffer = file.getChannel().map(FileChannel.MapMode.READ_WRITE, 0, totalSize);
-        System.out.println("position:" + mappedByteBuffer.position());
-        System.out.println("capacity:" + mappedByteBuffer.capacity());
-        System.out.println("hasRemaining:" + mappedByteBuffer.hasRemaining());
-        System.out.println("limit:" + mappedByteBuffer.limit());
-        for(int i = 0; i < totalSize/16 ; i++){
-            mappedByteBuffer.put((byte)'A');
-            mappedByteBuffer.put((byte)'B');
-            mappedByteBuffer.put((byte)'C');
-            mappedByteBuffer.put((byte)'D');
-            mappedByteBuffer.putInt(i);
-            mappedByteBuffer.putLong(i);
+    public static void main(String args[]) {
+        RandomAccessFile file = null;
+        try {
+            file = new RandomAccessFile("/mapped.dat", "rw");
+            MappedByteBuffer mappedByteBuffer = file.getChannel().map(FileChannel.MapMode.READ_WRITE, 0, totalSize);
+            System.out.println("position:" + mappedByteBuffer.position());
+            System.out.println("capacity:" + mappedByteBuffer.capacity());
+            System.out.println("hasRemaining:" + mappedByteBuffer.hasRemaining());
+            System.out.println("limit:" + mappedByteBuffer.limit());
+            for (int i = 0; i < totalSize / 16; i++) {
+                mappedByteBuffer.put((byte) 'A');
+                mappedByteBuffer.put((byte) 'B');
+                mappedByteBuffer.put((byte) 'C');
+                mappedByteBuffer.put((byte) 'D');
+                mappedByteBuffer.putInt(i);
+                mappedByteBuffer.putLong(i);
+            }
+            System.out.println("position:" + mappedByteBuffer.position());
+            System.out.println("capacity:" + mappedByteBuffer.capacity());
+            System.out.println("hasRemaining:" + mappedByteBuffer.hasRemaining());
+            System.out.println("limit:" + mappedByteBuffer.limit());
+            for (int i = 4; i < 100; ) {
+                mappedByteBuffer.position(i);
+                System.out.println(i + " int:" + mappedByteBuffer.getInt());
+                System.out.println(i + " long:" + mappedByteBuffer.getLong());
+                i += 16;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(null != file) {
+                try {
+                    file.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        System.out.println("position:" + mappedByteBuffer.position());
-        System.out.println("capacity:" + mappedByteBuffer.capacity());
-        System.out.println("hasRemaining:" + mappedByteBuffer.hasRemaining());
-        System.out.println("limit:" + mappedByteBuffer.limit());
-        for(int i = 4; i < 100; ){
-            mappedByteBuffer.position(i);
-            System.out.println(i + " int:" + mappedByteBuffer.getInt());
-            System.out.println(i + " long:" + mappedByteBuffer.getLong());
-            i += 16;
-        }
+
     }
 }
