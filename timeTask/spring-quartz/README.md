@@ -1,13 +1,14 @@
 ## spring quartz guide
+[TOC]
 ### spring quartz standalone mode.
 * as standalone mode use RAMJobStore as its storage device, this mode dose not support persistence.
 and this mode is not clustered, which means that if multi instance exists, job will cause repetitive execution.
 
 * How-To :
 1. solve jar dependencies.
-    > 1. spring-core/spring-context/spring-context-support/spring-web/spring-tx
-    > 2. quartz
-    > 3. log4j/logback-core/logback-classic
+    1. spring-core/spring-context/spring-context-support/spring-web/spring-tx
+    2. quartz
+    3. log4j/logback-core/logback-classic
 
 2. create job
     1. arbitrary class with a method.
@@ -105,9 +106,10 @@ and this mode is not clustered, which means that if multi instance exists, job w
 * In cluster mode all instances will report jobs to DB, only one instance will execute the job.
 * If instance in working failed, job will reallocate to other instance.
 * How-To:
+
 1. add more dependencies
-    > 1. spring-jdbc
-    > 2. mysql-connector-java
+    1. spring-jdbc
+    2. mysql-connector-java
 
 2. create job
     * Only class implement interface Job is allowed, because quartz will store job in DB.
