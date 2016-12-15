@@ -114,7 +114,7 @@ and this mode is not clustered, which means that if multi instance exists, job w
 
 3. create a database.
     * DB is used to support persistence, synchronization between instants.
-    * see [table schema]('spring-quartz-cluster/doc/tables_mysql_innodb.sql')
+    * see [table schema](spring-quartz-cluster/doc/tables_mysql_innodb.sql)
 
 4. define a dataSource in applicationContext.xml
     * use dbcp or c3p0.
