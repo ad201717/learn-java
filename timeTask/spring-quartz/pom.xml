@@ -13,6 +13,7 @@
     <modules>
         <module>spring-quartz-standalone</module>
         <module>spring-quartz-cluster</module>
+        <module>spring-quartz-dynamic</module>
     </modules>
     <name>spring-quartz</name>
     <url>http://maven.apache.org</url>

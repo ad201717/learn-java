@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<bean id="dynamicJobScheduler" class="com.howe.learn.quartz.DynamicJobScheduler">
+		<property name="scheduler">
+			<!-- 调度工厂 -->
+			<bean name="dynamicJobSchedulerBase" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+				<property name="dataSource">
+					<ref bean="quartzDs"/>
+				</property>
+				<property name="applicationContextSchedulerContextKey" value="applicationContextKey"/>
+				<property name="configLocation" value="classpath:quartz.properties"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="dynamicJobCreator" class="com.howe.learn.quartz.example.DynamicJobCreator" init-method="init">
+		<property name="total" value="50"/>
+		<property name="initWaitTime" value="5000"/>
+		<property name="dynamicJobScheduler" ref="dynamicJobScheduler"/>
+	</bean>
+</beans>
