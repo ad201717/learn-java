@@ -14,6 +14,8 @@
         <module>mappedByteBuffer</module>
         <module>redis</module>
         <module>timeTask</module>
+        <module>rocketMQ</module>
+        <module>springBoot</module>
     </modules>
 
     <build>

@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>poem list</title>
+    <link rel="stylesheet" type="text/css" media="screen, projection"
+          href="/static/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body class="container">
+<p class="center-block">Welcome</p>
+<p class="panel-title">look this poem</p>
+<ul class="list-group" th:each="poem: ${list}">
+    <li class="list-group-item" th:text="${poem}">poem</li>
+</ul>
+</body>
+</html>
