@@ -22,7 +22,7 @@ public class StringToCalcRequestDecoder extends MessageToMessageDecoder<String> 
             msg = msg.substring(PREFIX.length());
             String[] arrs = msg.split(":");
             CalcRequest request = new CalcRequest();
-            request.setReqId(arrs[0]);
+            request.setReqId(Integer.parseInt(arrs[0]));
             request.setX(Integer.parseInt(arrs[1].split(" ")[0]));
             request.setCalMethod(CalcRequest.CalMethod.from(arrs[1].split(" ")[1].toCharArray()[0]));
             request.setY(Integer.parseInt(arrs[1].split(" ")[2]));

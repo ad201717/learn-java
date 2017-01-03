@@ -6,13 +6,13 @@ package com.howe.learn.common;
  */
 public class RemoteResponse {
 
-    private String reqId;
+    private int reqId;
 
-    public String getReqId() {
+    public int getReqId() {
         return reqId;
     }
 
-    public void setReqId(String reqId) {
+    public void setReqId(int reqId) {
         this.reqId = reqId;
     }
 }

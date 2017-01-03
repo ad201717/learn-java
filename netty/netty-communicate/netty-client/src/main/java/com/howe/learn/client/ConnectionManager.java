@@ -27,6 +27,7 @@ import java.util.UUID;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @Author Karl
@@ -110,7 +111,7 @@ public class ConnectionManager {
 
     public static class DefaultConnection implements Connection {
         private Channel channel;
-        private ConcurrentHashMap<String, RequestWrapper> requestMap = new ConcurrentHashMap<String, RequestWrapper>();
+        private ConcurrentHashMap<Integer, RequestWrapper> requestMap = new ConcurrentHashMap<Integer, RequestWrapper>();
 
         public DefaultConnection(Channel channel){
             this.channel = channel;
@@ -128,7 +129,6 @@ public class ConnectionManager {
 
         private RequestWrapper sendInternal(RemoteRequest req){
             final RequestWrapper reqWrapper = new RequestWrapper();
-            reqWrapper.newReqId();
             requestMap.put(reqWrapper.reqId, reqWrapper);
             req.setReqId(reqWrapper.reqId);
             channel.writeAndFlush(req).addListener(new GenericFutureListener<Future<? super Void>>() {
@@ -146,7 +146,7 @@ public class ConnectionManager {
             return reqWrapper;
         }
 
-        public void result(String reqId, RemoteResponse resp){
+        public void result(int reqId, RemoteResponse resp){
             RequestWrapper request = requestMap.get(reqId);
             if(null != request){
                 request.result = resp;
@@ -161,13 +161,10 @@ public class ConnectionManager {
     }
 
     static class RequestWrapper {
-        String reqId;
+        private static AtomicInteger couter = new AtomicInteger(0);
+        int reqId = couter.getAndIncrement();
         RemoteResponse result;
         Callback callback;
-
-        public void newReqId(){
-            this.reqId = UUID.randomUUID().toString();
-        }
 
         public RemoteResponse get(long timeoutMS) throws InterruptedException {
             if(null != result){

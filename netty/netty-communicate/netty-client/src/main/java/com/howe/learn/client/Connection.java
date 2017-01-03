@@ -13,5 +13,5 @@ public interface Connection {
 
     RemoteResponse sendSync(RemoteRequest req) throws InterruptedException ;
 
-    void result(String reqId, RemoteResponse resp);
+    void result(int reqId, RemoteResponse resp);
 }

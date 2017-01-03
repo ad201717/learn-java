@@ -19,7 +19,7 @@ public class StringToCalcResponseDecoder extends MessageToMessageDecoder<String>
         if(msg.startsWith(PREFIX)){
             msg = msg.substring(PREFIX.length());
             CalcResponse response = new CalcResponse();
-            response.setReqId(msg.split(":")[0]);
+            response.setReqId(Integer.parseInt(msg.split(":")[0]));
             response.setReqStr(msg.split(":")[1].split("=")[0]);
             response.setZ(Integer.parseInt(msg.split(":")[1].split("=")[1]));
             out.add(response);
