@@ -4,7 +4,7 @@
 1. netty server & client communicate
 
 ## mappedByteBuffer
-    1. introduce [see](mappedByteBuffer/README.md)
+1. introduce [see](mappedByteBuffer/README.md)
 
 ## redis
 
