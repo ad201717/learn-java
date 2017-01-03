@@ -16,6 +16,8 @@
         <module>timeTask</module>
         <module>rocketMQ</module>
         <module>springBoot</module>
+        <module>serialization</module>
+        <module>serialization</module>
     </modules>
 
     <build>

@@ -41,8 +41,8 @@ public class RankListServiceImpl implements RankListService {
 
     @Override
     public Rank add(Rank rank) {
-        boolean op = rankRedisTemplate.opsForZSet().add(RANK_KEY, rank, rank.getScore());
-        rank.setRank(rankRedisTemplate.opsForZSet().rank(RANK_KEY, rank));
+        rankRedisTemplate.opsForZSet().add(RANK_KEY, rank, rank.getScore());
+        rank.setRank(rankRedisTemplate.opsForZSet().reverseRank(RANK_KEY, rank));
         return rank;
     }
 }

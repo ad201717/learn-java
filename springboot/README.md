@@ -12,6 +12,7 @@
     </parent>
     ```
 2. pom 加入依赖
+
     ```xml
     <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -23,13 +24,17 @@
      ```
 
 ### 默认端口:8080。修改方式(按优先级低到高排列)：
+
 1. 设置 run/debug configuration => VM options: -Dserver.port=9090
+
 2. 在配置文件 application.yml 中配置端口
+
     ```yml
     server:
         port:10010
     ```
 3. 在配置文件 application.properties 中配置端口
+
     ```properties
     server.port=10020
     ```
@@ -53,12 +58,14 @@
 1. springBoot 官方集成 Thymeleaf 模板引擎
 
     引入 Thymeleaf 引擎需导入jar包
+
     ```xml
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-thymeleaf</artifactId>
     </dependency>
     ```
+
 2. 模板文件位置
 
    默认情况下我们需要把编写的模板文件放在src/main/resources/templates目录下，如图
@@ -68,6 +75,7 @@
    如果想要更换templates目录可以修改spring.thymeleaf.prefix配置项
 
 3. 启用 ThymeleafViewResolver 。在 Main 中配置 viewResolver
+
     ```
     @Bean
     public ViewResolver viewResolver() {
@@ -79,7 +87,9 @@
     ```
 
 4. 引用静态资源
-- 继承 WebMvcConfigurerAdapter 实现 addResourceHandlers 方法
+
+    - 继承 WebMvcConfigurerAdapter 实现 addResourceHandlers 方法
+
     ```
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -91,5 +101,27 @@
     }
     ```
 
+5. 添加生产特性
+
+    加入 actuator 依赖之后，应用启动后会创建一些基于Web的Endpoint
+
+    - /autoconfig ，用来查看 Spring Boot 的框架自动配置信息，哪些被自动加载，哪些没有
+    - /beans ，显示应用上下文的 Bean 列表
+    - /dump ，显示线程dump信息
+    - /health ，应用健康检查
+    - /metrics ，应用性能监控
+    - /shutdown ，默认没有打开
+    - /trace ，查看历史请求uri、request、response
+
+    maven 依赖如下：
+
+    ```
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    ```
+
 ### references
+
 1. [Spring Boot——开发新一代Spring Java应用](https://www.tianmaying.com/tutorial/spring-boot-overview)
