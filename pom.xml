@@ -18,6 +18,14 @@
         <module>springBoot</module>
         <module>serialization</module>
         <module>serialization</module>
+        <module>datasource</module>
+        <module>myTrace</module>
+        <module>sync</module>
+        <module>multithread</module>
+        <module>shardingDB</module>
+        <module>sequence</module>
+        <module>circuitBreaker</module>
+        <module>spider</module>
     </modules>
 
     <build>
