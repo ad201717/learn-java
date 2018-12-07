@@ -27,6 +27,8 @@
         <module>circuitBreaker</module>
         <module>spider</module>
         <module>mybatisgeneratortest</module>
+        <module>rabbitmq</module>
+        <module>statemachine</module>
     </modules>
 
     <build>
