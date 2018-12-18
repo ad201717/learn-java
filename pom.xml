@@ -29,6 +29,7 @@
         <module>mybatisgeneratortest</module>
         <module>rabbitmq</module>
         <module>statemachine</module>
+        <module>sentinel</module>
     </modules>
 
     <build>
