@@ -30,6 +30,11 @@
         <module>rabbitmq</module>
         <module>statemachine</module>
         <module>sentinel</module>
+        <module>objectpool</module>
+        <module>spring-cloud</module>
+        <module>grpc</module>
+        <module>zookeeper</module>
+        <module>io</module>
     </modules>
 
     <build>

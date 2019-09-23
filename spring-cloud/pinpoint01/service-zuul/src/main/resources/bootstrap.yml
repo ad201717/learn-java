@@ -1,0 +1,14 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: gatway
+
+#配置注册中心的地址，以便根据serviceID去发现这些service
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
