@@ -19,7 +19,7 @@
 
     <properties>
         <spring.version>4.3.5.RELEASE</spring.version>
-        <spring-boot-starter-web.version>1.4.3.RELEASE</spring-boot-starter-web.version>
+        <spring-boot-starter-web.version>2.5.12</spring-boot-starter-web.version>
         <spring-boot-dependencies.version>1.4.3.RELEASE</spring-boot-dependencies.version>
         <spring-boot-starter-thymeleaf.version>1.4.3.RELEASE</spring-boot-starter-thymeleaf.version>
         <spring-boot-starter-redis.version>1.4.3.RELEASE</spring-boot-starter-redis.version>
